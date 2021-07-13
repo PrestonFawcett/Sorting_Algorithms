@@ -95,7 +95,12 @@ public:
   // is dark, and so on for the entire row of disks.
   bool is_initialized() const {
     // TODO: Write code for this function, including rewriting the return
-    // statement, and then delete these comments.  
+    // statement, and then delete these comments.
+    for (auto i = 0; i < total_count() - 1; i+2){
+      if (_colors[i] != DISK_LIGHT && _colors[i + 1] != DISK_DARK)
+        return false;
+    }
+    return true;
   }
 
   // Return true when this disk_state is fully sorted, with all dark disks
@@ -104,7 +109,11 @@ public:
   bool is_sorted() const {
     // TODO: Write code for this function, including rewriting the return
     // statement, and then delete these comments.
-    return false;  
+    for (auto i = 0; i < dark_count(); i++){
+        if (_colors[i] != DISK_DARK)
+          return false;
+    }
+    return true;  
   }
 };
 
@@ -145,6 +154,22 @@ sorted_disks sort_alternate(const disk_state& before) {
 sorted_disks sort_lawnmower(const disk_state& before) {
   // TODO: Write code for this function, including rewriting the return
   // statement, and then delete these comments.
-  return sorted_disks(before, 0);
+  disk_state after = before;
+  int swap_count = 0;
+  // while (!after.is_sorted()){
+  //   for (auto i = 0; i < after.total_count(); i++){
+  //     if (after.get(i) == DISK_LIGHT && after.get(i + 1) == DISK_DARK){
+  //       after.swap(i);
+  //       swap_count++;
+  //     }
+  //   }
+  //   for (auto i = (after.total_count() - 1); i > 0; i--){
+  //     if (after.get(i - 1) == DISK_DARK && after.get(i) == DISK_LIGHT){
+  //       after.swap(i - 1);
+  //       swap_count++;
+  //     }
+  //   }
+  // }
+  return sorted_disks(after, swap_count);
 }
   
