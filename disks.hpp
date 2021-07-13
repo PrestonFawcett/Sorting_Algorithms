@@ -96,11 +96,11 @@ public:
   bool is_initialized() const {
     // TODO: Write code for this function, including rewriting the return
     // statement, and then delete these comments.
-    for (auto i = 0; i < total_count() - 1; i+2){
-      if (_colors[i] != DISK_LIGHT && _colors[i + 1] != DISK_DARK)
-        return false;
-    }
-    return true;
+    // for (auto i = 0; i < total_count() - 1; i+2){
+    //   if (_colors[i] != DISK_LIGHT && _colors[i + 1] != DISK_DARK)
+    //     return false;
+    // }
+    return false;
   }
 
   // Return true when this disk_state is fully sorted, with all dark disks
@@ -156,20 +156,28 @@ sorted_disks sort_lawnmower(const disk_state& before) {
   // statement, and then delete these comments.
   disk_state after = before;
   int swap_count = 0;
-  // while (!after.is_sorted()){
-  //   for (auto i = 0; i < after.total_count(); i++){
-  //     if (after.get(i) == DISK_LIGHT && after.get(i + 1) == DISK_DARK){
-  //       after.swap(i);
-  //       swap_count++;
-  //     }
-  //   }
-  //   for (auto i = (after.total_count() - 1); i > 0; i--){
-  //     if (after.get(i - 1) == DISK_DARK && after.get(i) == DISK_LIGHT){
-  //       after.swap(i - 1);
-  //       swap_count++;
-  //     }
-  //   }
-  // }
+
+  while (!after.is_sorted()){
+    for (auto i = 0; i < after.total_count() - 1; i++){
+      if (after.get(i) == DISK_LIGHT && after.get(i + 1) == DISK_DARK){
+        after.swap(i);
+        swap_count++;
+      }
+    }
+    for (auto i = 0; i < after.total_count(); i++){
+      std::cout << after.get(i) << " ";
+    }
+    for (auto i = after.total_count() - 1; i > 0; i--){
+      if (after.get(i - 1) == DISK_DARK && after.get(i) == DISK_LIGHT){
+        after.swap(i - 1);
+        swap_count++;
+      }
+    }
+    for (auto i = 0; i < after.total_count(); i++){
+      std::cout << after.get(i) << " ";
+    }
+    std::cout << std::endl;
+  }
   return sorted_disks(after, swap_count);
 }
   
