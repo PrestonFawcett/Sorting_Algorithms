@@ -164,19 +164,12 @@ sorted_disks sort_lawnmower(const disk_state& before) {
         swap_count++;
       }
     }
-    for (auto i = 0; i < after.total_count(); i++){
-      std::cout << after.get(i) << " ";
-    }
     for (auto i = after.total_count() - 1; i > 0; i--){
-      if (after.get(i - 1) == DISK_DARK && after.get(i) == DISK_LIGHT){
+      if (after.get(i - 1) == DISK_LIGHT && after.get(i) == DISK_DARK){
         after.swap(i - 1);
         swap_count++;
       }
     }
-    for (auto i = 0; i < after.total_count(); i++){
-      std::cout << after.get(i) << " ";
-    }
-    std::cout << std::endl;
   }
   return sorted_disks(after, swap_count);
 }
