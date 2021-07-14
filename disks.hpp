@@ -96,11 +96,11 @@ public:
   bool is_initialized() const {
     // TODO: Write code for this function, including rewriting the return
     // statement, and then delete these comments.
-    // for (auto i = 0; i < total_count() - 1; i+2){
-    //   if (_colors[i] != DISK_LIGHT && _colors[i + 1] != DISK_DARK)
-    //     return false;
-    // }
-    return false;
+    for (auto i = 0; i < total_count() - 1; i += 2){
+      if (_colors[i] != DISK_DARK && _colors[i + 1] != DISK_LIGHT)
+        return false;
+    }
+    return true;
   }
 
   // Return true when this disk_state is fully sorted, with all dark disks
@@ -146,7 +146,24 @@ public:
 sorted_disks sort_alternate(const disk_state& before) {
   // TODO: Write code for this function, including rewriting the return
   // statement, and then delete these comments.
-  return sorted_disks(before, 0);
+  disk_state after = before;
+  int swap_count = 0;
+
+  while (!after.is_sorted()) {
+    for (auto i = 0; i < after.total_count() - 1; i += 2) {
+      if (after.get(i) == DISK_LIGHT && after.get(i + 1) == DISK_DARK) {
+        after.swap(i);
+        swap_count++;
+      }
+    }
+    for (auto i = 1; i < after.total_count() - 1; i += 2) {
+      if (after.get(i) == DISK_LIGHT && after.get(i + 1) == DISK_DARK) {
+        after.swap(i);
+        swap_count++;
+      }
+    }
+  }
+  return sorted_disks(after, swap_count);
 }
 
 
