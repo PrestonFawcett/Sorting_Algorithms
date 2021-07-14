@@ -97,7 +97,7 @@ public:
     // TODO: Write code for this function, including rewriting the return
     // statement, and then delete these comments.
     for (auto i = 0; i < total_count() - 1; i += 2){
-      if (_colors[i] != DISK_DARK && _colors[i + 1] != DISK_LIGHT)
+      if (get(i) != DISK_DARK || get(i + 1) != DISK_LIGHT)
         return false;
     }
     return true;
