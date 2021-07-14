@@ -94,9 +94,7 @@ public:
   // that the first disk at index 0 is light, the second disk at index 1
   // is dark, and so on for the entire row of disks.
   bool is_initialized() const {
-    // TODO: Write code for this function, including rewriting the return
-    // statement, and then delete these comments.
-    for (auto i = 0; i < total_count() - 1; i += 2){
+    for (auto i = 0; i < total_count() - 1; i += 2) {
       if (get(i) != DISK_DARK || get(i + 1) != DISK_LIGHT)
         return false;
     }
@@ -107,9 +105,7 @@ public:
   // on the left (low indices) and all light disks on the right (high
   // indices).
   bool is_sorted() const {
-    // TODO: Write code for this function, including rewriting the return
-    // statement, and then delete these comments.
-    for (auto i = 0; i < dark_count(); i++){
+    for (auto i = 0; i < dark_count(); i++) {
         if (_colors[i] != DISK_DARK)
           return false;
     }
@@ -144,8 +140,6 @@ public:
 
 // Algorithm that sorts disks using the alternate algorithm.
 sorted_disks sort_alternate(const disk_state& before) {
-  // TODO: Write code for this function, including rewriting the return
-  // statement, and then delete these comments.
   disk_state after = before;
   int swap_count = 0;
 
@@ -169,20 +163,18 @@ sorted_disks sort_alternate(const disk_state& before) {
 
 // Algorithm that sorts disks using the lawnmower algorithm.
 sorted_disks sort_lawnmower(const disk_state& before) {
-  // TODO: Write code for this function, including rewriting the return
-  // statement, and then delete these comments.
   disk_state after = before;
   int swap_count = 0;
 
-  while (!after.is_sorted()){
-    for (auto i = 0; i < after.total_count() - 1; i++){
-      if (after.get(i) == DISK_LIGHT && after.get(i + 1) == DISK_DARK){
+  while (!after.is_sorted()) {
+    for (auto i = 0; i < after.total_count() - 1; i++) {
+      if (after.get(i) == DISK_LIGHT && after.get(i + 1) == DISK_DARK) {
         after.swap(i);
         swap_count++;
       }
     }
-    for (auto i = after.total_count() - 1; i > 0; i--){
-      if (after.get(i - 1) == DISK_LIGHT && after.get(i) == DISK_DARK){
+    for (auto i = after.total_count() - 1; i > 0; i--) {
+      if (after.get(i - 1) == DISK_LIGHT && after.get(i) == DISK_DARK) {
         after.swap(i - 1);
         swap_count++;
       }
