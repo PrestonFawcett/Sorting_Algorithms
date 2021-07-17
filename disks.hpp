@@ -166,7 +166,7 @@ sorted_disks sort_lawnmower(const disk_state& before) {
   disk_state after = before;
   int swap_count = 0;
 
-  for (auto j = 1; j <= after.light_count(); j++) {
+  for (auto j = 1; j <= after.light_count()/2; j++) {
     for (auto i = 0; i < after.total_count() - 1; i++) {
       if (after.get(i) == DISK_LIGHT && after.get(i + 1) == DISK_DARK) {
         after.swap(i);
